@@ -1,0 +1,46 @@
+{
+  "name": "devtools-server",
+  "version": "0.4.0",
+  "capabilities": ["filesystem:read", "filesystem:write", "network"],
+  "tools": [
+    {
+      "name": "read_file",
+      "description": "Read a UTF-8 text file from the project workspace.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {"type": "string", "maxLength": 256}
+        },
+        "required": ["path"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "write_file",
+      "description": "Create or overwrite a file in the project workspace.",
+      "capabilities": ["filesystem:write"],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {"type": "string", "maxLength": 256},
+          "content": {"type": "string"}
+        },
+        "required": ["path", "content"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "fetch_url",
+      "description": "Download the contents of an HTTP(S) URL and return the body.",
+      "capabilities": ["network"],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {"type": "string", "format": "uri"}
+        },
+        "required": ["url"],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

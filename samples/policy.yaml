@@ -1,0 +1,21 @@
+# MCP-Guard allow/deny policy (CI gate).
+# A tool is DENIED if it declares any denied capability, or if it is not in
+# allow_tools while default is "deny".
+
+default: deny
+
+# Capabilities that are never permitted, regardless of the tool.
+deny_capabilities:
+  - shell
+  - exec
+  - env
+  - secret
+
+# Tools explicitly permitted for this agent.
+allow_tools:
+  - get_time
+  - read_note
+  - search_notes
+  - read_file
+  - write_file
+  - fetch_url

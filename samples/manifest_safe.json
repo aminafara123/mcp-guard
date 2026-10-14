@@ -1,0 +1,44 @@
+{
+  "name": "notes-server",
+  "version": "1.2.0",
+  "capabilities": ["filesystem:read"],
+  "tools": [
+    {
+      "name": "get_time",
+      "description": "Return the current server time in the requested timezone.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "tz": {"type": "string", "enum": ["utc", "local"]}
+        },
+        "required": ["tz"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "read_note",
+      "description": "Return the text of a saved note by its id.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "note_id": {"type": "string", "pattern": "^[a-f0-9]{8}$"}
+        },
+        "required": ["note_id"],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "search_notes",
+      "description": "Full-text search over the user's notes and return matching titles.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "term": {"type": "string", "maxLength": 128},
+          "limit": {"type": "integer", "minimum": 1, "maximum": 50}
+        },
+        "required": ["term"],
+        "additionalProperties": false
+      }
+    }
+  ]
+}
